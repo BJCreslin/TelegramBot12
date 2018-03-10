@@ -11,7 +11,7 @@ public class MyBot extends TelegramLongPollingBot {
             if (update.hasMessage() && update.getMessage().hasText()) {
                 // Set variables
                 String message_text = update.getMessage().getText();
-                if (message_text.toLowerCase().equals("салам")){message_text="салам попалам";}
+                if (message_text.toLowerCase().equals("salam")){message_text="salam popolam";}
                 long chat_id = update.getMessage().getChatId();
 
                 SendMessage message = new SendMessage() // Create a message object object
