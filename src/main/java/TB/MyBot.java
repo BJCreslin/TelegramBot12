@@ -2,6 +2,7 @@ package TB;
 
 import TB.config.ConfigCommand;
 import TB.objects.MessageBotTextSingltone;
+import TB.reactions.EchoSwitch;
 import TB.reactions.Hello;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Message;
@@ -27,6 +28,11 @@ public class MyBot extends TelegramLongPollingBot {
             // При запуске бота здороваемся
             if ("/start".equalsIgnoreCase(message_text)) {
                 new Hello().execute();
+                sendMsg(message, MessageBotTextSingltone.getText());
+            }
+
+            if (message_text.toLowerCase().startsWith("Echo switch")) {
+                new EchoSwitch().execute();
                 sendMsg(message, MessageBotTextSingltone.getText());
             }
 

@@ -20,6 +20,8 @@ public class ConfigCommand {
     }
 
 
+
+
     public static String getBOTNAME() {
 
         return BOTNAME;
