@@ -1,12 +1,14 @@
 package TB.reactions;
 
+import TB.objects.MessageBotMessage;
+import TB.objects.MessageBotTextSingltone;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.replykeyboard.InlineKeyboardMarkup;
 
 /**
  * Класс для формирования приветствий
  */
-public class Hello {
+public class Hello implements Comandable {
 
 
     /**
@@ -15,9 +17,11 @@ public class Hello {
      *
      * @return
      */
-    public static String helloMessage() {
-        return "<b>ПРивет. Это просто бот</b>";
 
+
+    public void execute() {
+        MessageBotTextSingltone.setText("<b>ПРивет. Это просто бот</b>");
     }
 }
+
 

@@ -1,6 +1,7 @@
 package TB;
 
 import TB.config.ConfigCommand;
+import TB.objects.MessageBotTextSingltone;
 import TB.reactions.Hello;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Update;
@@ -12,15 +13,21 @@ public class MyBot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         String messageTextForAnswer = ""; //переменная, в которой будут содержаться ответы
 
+
         // We check if the update has a message and the message has text
         if (update.hasMessage() && update.getMessage().hasText()) {
             // Set variables
             String message_text = update.getMessage().getText();
 
+            if (ConfigCommand.isEchoAnswer()) {
+                messageTextForAnswer = message_text;
+            }
+
 
             // При запуске бота здороваемся
             if ("/start".equalsIgnoreCase(message_text)) {
-                messageTextForAnswer = Hello.helloMessage();
+                new Hello().execute();
+                messageTextForAnswer = MessageBotTextSingltone.getText();
             }
 
 
@@ -36,6 +43,7 @@ public class MyBot extends TelegramLongPollingBot {
 
             SendMessage message = new SendMessage() // Create a message object object
                     .setChatId(chat_id)
+                    .setParseMode("HTML")
                     .setText(messageTextForAnswer);
 
             try {
