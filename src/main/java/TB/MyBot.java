@@ -31,7 +31,7 @@ public class MyBot extends TelegramLongPollingBot {
                 sendMsg(message, MessageBotTextSingltone.getText());
             }
 
-            if (message_text.toLowerCase().startsWith("Echo switch")) {
+            if (message_text.toLowerCase().startsWith("echo switch".toLowerCase())) {
                 new EchoSwitch().execute();
                 sendMsg(message, MessageBotTextSingltone.getText());
             }
