@@ -4,6 +4,7 @@ import TB.config.ConfigCommand;
 import TB.objects.MessageBotTextSingltone;
 import TB.reactions.Hello;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
+import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
@@ -13,23 +14,21 @@ public class MyBot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         String messageTextForAnswer = ""; //переменная, в которой будут содержаться ответы
 
-
+        Message message = update.getMessage();
         // We check if the update has a message and the message has text
-        if (update.hasMessage() && update.getMessage().hasText()) {
+        if (message != null && message.hasText()) {
             // Set variables
             String message_text = update.getMessage().getText();
 
             if (ConfigCommand.isEchoAnswer()) {
-                messageTextForAnswer = message_text;
+                sendMsg(message, message_text);
             }
-
 
             // При запуске бота здороваемся
             if ("/start".equalsIgnoreCase(message_text)) {
                 new Hello().execute();
-                messageTextForAnswer = MessageBotTextSingltone.getText();
+                sendMsg(message, MessageBotTextSingltone.getText());
             }
-
 
             if (message_text.toLowerCase().equals("salam")) {
                 messageTextForAnswer = "salam popolam";
@@ -41,13 +40,13 @@ public class MyBot extends TelegramLongPollingBot {
 
             long chat_id = update.getMessage().getChatId();
 
-            SendMessage message = new SendMessage() // Create a message object object
+            SendMessage message1 = new SendMessage() // Create a message object object
                     .setChatId(chat_id)
                     .setParseMode("HTML")
                     .setText(messageTextForAnswer);
 
             try {
-                execute(message); // Sending our message object to user
+                execute(message1); // Sending our message object to user
             } catch (TelegramApiException e) {
                 e.printStackTrace();
             }
@@ -69,4 +68,19 @@ public class MyBot extends TelegramLongPollingBot {
         // TODO
         return ConfigCommand.getBotToken();
     }
-}
+
+    private void sendMsg(Message message, String text) {
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.enableMarkdown(true);
+        sendMessage.setChatId(message.getChatId().toString());
+        sendMessage.setReplyToMessageId(message.getMessageId());
+        sendMessage.setText(text);
+        sendMessage.enableHtml(true);
+        try {
+            sendMessage(sendMessage);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+
+
+    }
