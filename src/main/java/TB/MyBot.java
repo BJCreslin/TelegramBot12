@@ -28,15 +28,15 @@ public class MyBot extends TelegramLongPollingBot {
 
             // При запуске бота здороваемся
             if ("/start".equalsIgnoreCase(message_text)) {
-                new Hello().execute();
-                sendMsg(message, MessageBotTextSingltone.getText());
+                String messText = new Hello().execute();
+                sendMsg(message, messText);
             }
 
             if (message_text.toLowerCase().startsWith("echo switch".toLowerCase())) {
                 String messText = new EchoSwitch().execute();
                 sendMsg(message, messText);
             }
-            if (message_text.toLowerCase().startsWith("Погода".toLowerCase())) {
+            if (message_text.toLowerCase().startsWith("погода".toLowerCase())) {
                 String messText = new WeatherCommand().execute();
                 sendMsg(message, messText);
             }
