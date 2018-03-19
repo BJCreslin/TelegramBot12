@@ -19,8 +19,11 @@ public class Hello implements Comandable {
      */
 
 
-    public void execute() {
+    public String execute() {
         MessageBotTextSingltone.setText("<b>ПРивет. Это просто бот</b>");
+        return "<b>ПРивет. Это просто бот</b> \n" +
+                "для смены эхо режима наберите - echo switch\n"+
+                "Что бы узнать погоду наберите - Погода";
     }
 }
 

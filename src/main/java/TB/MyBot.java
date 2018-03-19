@@ -4,6 +4,7 @@ import TB.config.ConfigCommand;
 import TB.objects.MessageBotTextSingltone;
 import TB.reactions.EchoSwitch;
 import TB.reactions.Hello;
+import TB.reactions.WeatherCommand;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
@@ -32,9 +33,14 @@ public class MyBot extends TelegramLongPollingBot {
             }
 
             if (message_text.toLowerCase().startsWith("echo switch".toLowerCase())) {
-                new EchoSwitch().execute();
-                sendMsg(message, MessageBotTextSingltone.getText());
+                String messText = new EchoSwitch().execute();
+                sendMsg(message, messText);
             }
+            if (message_text.toLowerCase().startsWith("Погода".toLowerCase())) {
+                String messText = new WeatherCommand().execute();
+                sendMsg(message, messText);
+            }
+
 
             if (message_text.toLowerCase().equals("salam")) {
                 messageTextForAnswer = "salam popolam";
