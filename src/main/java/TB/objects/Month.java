@@ -27,6 +27,14 @@ public class Month {
         monthList.add("Декабря");
     }
 
+    /**
+     * Метод возращает месяц по номеру месяца в склонении.
+     *
+     * @param number
+     * @return
+     * @throws InvalidMonthException
+     */
+
     public static String getMonthByNumberWithDeclension(int number) throws InvalidMonthException {
         if ((number < 1) || (number > 12)) {
             throw new InvalidMonthException();
