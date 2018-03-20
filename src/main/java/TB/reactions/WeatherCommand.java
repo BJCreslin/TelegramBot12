@@ -10,14 +10,32 @@ public class WeatherCommand implements Comandable {
     public String execute() {
         try {
             List<Forecast> weatherList = Weather.getWeather();
-            return "Погода в Томске на \n" +
-                    weatherList.get(0).getDay() + "." +
-                    weatherList.get(0).getMonth() + "." +
-                    weatherList.get(0).getYear() + "  " +
-                    weatherList.get(0).getHour() + " часов \n" +
-                    "Температура: " + (weatherList.get(0).getMaxTemperature() + weatherList.get(0).getMinTemperature()) / 2 +
-                    "\n" +
-                    "Давление: " + (weatherList.get(0).getMaxPressure() + weatherList.get(0).getMinPressure()) / 2;
+            String textOut = "Погода в Томске на \n";
+            textOut += weatherList.get(0).getMonth() + "." +
+                    weatherList.get(0).getYear() + "  ";
+            switch (weatherList.get(0).getHour()) {
+                case 3:
+                    textOut += " 3 часа ночи";
+                    break;
+                case 9:
+                    textOut += " 9 часов утра";
+                    break;
+                case 15:
+                    textOut += " 3 часа дня";
+                    break;
+                case 21:
+                    textOut += " 9 часов вечера";
+                    break;
+                default:
+                    textOut += weatherList.get(0).getHour();
+            }
+            textOut += "\n" + "Температура: " + (weatherList.get(0).getMaxTemperature() + weatherList.get(0).getMinTemperature()) / 2 +
+                    " °C" + "\n";
+            textOut += "Давление: " + (weatherList.get(0).getMaxPressure() + weatherList.get(0).getMinPressure()) / 2;
+            textOut += "mm Hg";
+
+
+            return textOut;
         } catch (Exception Ex) {
             return "Не могу получить погодные данные";
         }
