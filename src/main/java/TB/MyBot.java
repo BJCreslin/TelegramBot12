@@ -43,11 +43,13 @@ public class MyBot extends TelegramLongPollingBot {
 
 
             if (message_text.toLowerCase().equals("salam")) {
-                messageTextForAnswer = "salam popolam";
+                String messText = new Hello().execute();
+                sendMsg(message, messText);
             }
 
             if (message_text.toLowerCase().equals("привет")) {
-                messageTextForAnswer = "salam popolam";
+                String messText = new Hello().execute();
+                sendMsg(message, messText);
             }
 
             long chat_id = update.getMessage().getChatId();
