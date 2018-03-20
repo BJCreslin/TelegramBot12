@@ -24,7 +24,7 @@ public class WeatherCommand implements Comandable {
             List<Forecast> weatherList = Weather.getWeather();
             String textOut = "Погода в Томске на \n";
             try {
-
+                textOut+=weatherList.get(0).getDay()+" ";
                 textOut += Month.getMonthByNumberWithDeclension(weatherList.get(0).getMonth()) + "." +
                         weatherList.get(0).getYear() + "  ";
 
