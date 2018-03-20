@@ -52,18 +52,18 @@ public class MyBot extends TelegramLongPollingBot {
                 sendMsg(message, messText);
             }
 
-            long chat_id = update.getMessage().getChatId();
-
-            SendMessage message1 = new SendMessage() // Create a message object object
-                    .setChatId(chat_id)
-                    .setParseMode("HTML")
-                    .setText(messageTextForAnswer);
-
-            try {
-                execute(message1); // Sending our message object to user
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
-            }
+//            long chat_id = update.getMessage().getChatId();
+//
+//            SendMessage message1 = new SendMessage() // Create a message object object
+//                    .setChatId(chat_id)
+//                    .setParseMode("HTML")
+//                    .setText(messageTextForAnswer);
+//
+//            try {
+//                execute(message1); // Sending our message object to user
+//            } catch (TelegramApiException e) {
+//                e.printStackTrace();
+//            }
         }
     }
 
