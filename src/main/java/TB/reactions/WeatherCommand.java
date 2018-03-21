@@ -52,21 +52,43 @@ public class WeatherCommand implements Comandable {
                 textOut += simpleDateFormat.format(calendar.getTime());
             }
             textOut += "\n" + "Температура: " + (weatherList.get(0).getMaxTemperature() + weatherList.get(0).getMinTemperature()) / 2 +
-                    " °C" + "\n";
+                    " °C" + "\uD83C\uDF21" +"\n";
             textOut += "Давление: " + (weatherList.get(0).getMaxPressure() + weatherList.get(0).getMinPressure()) / 2;
-            textOut += "mm Hg";
-
-
+            textOut += "mm Hg\n";
             try {
                 textOut += getCloudiness(weatherList, 0);
             } catch (InvalidWeatherException Exx) {
-                textOut += " Не могу получить данные облачности. ";
+                textOut += " Не могу получить данные облачности.\n ";
             }
-
+            textOut += "\n";
+            try {
+                textOut += getRELWET(weatherList, 0);
+            } catch (InvalidWeatherException Exx) {
+                textOut += " Не могу получить данные влажности.\n ";
+            }
+            textOut += "\n";
+           // textOut += "\uD83D\uDE01";
             return textOut;
         } catch (Exception Ex) {
-            return "Не могу получить погодные данные";
+            return "Не могу получить погодные данные\n";
         }
+    }
+
+    /**
+     * МЕтод получения влажности
+     *
+     * @param weatherList распарсенные данные погоды
+     * @param i           счёт точки данных (0-3)0 - ближайщая, 1- +6 часов от ближайшей, 2 -+12..., 3- +18 ...
+     * @return Влажность
+     */
+    private String getRELWET(List<Forecast> weatherList, int i) throws InvalidWeatherException {
+        String relwetText = "Влажность ";
+        if ((i < 0) || (i > 3)) {
+            throw new InvalidWeatherException();
+        }
+        relwetText += String.valueOf(Math.round((weatherList.get(i).getMaxRelwet() + weatherList.get(i).getMinRelwet()) / 2));
+        relwetText += " %";
+        return relwetText;
     }
 
     /**
@@ -83,16 +105,16 @@ public class WeatherCommand implements Comandable {
         }
         switch (weatherList.get(i).getCloudiness()) {
             case 0:
-                cloudinessText = "Ясно";
+                cloudinessText = "Ясно ☀";
                 break;
             case 1:
-                cloudinessText = "Малооблачно";
+                cloudinessText = "Малооблачно ⛅";
                 break;
             case 2:
-                cloudinessText = "Облачно";
+                cloudinessText = "Облачно ⛅";
                 break;
             case 3:
-                cloudinessText = "Пасмурно";
+                cloudinessText = "Пасмурно ☁";
                 break;
             default:
                 throw new InvalidWeatherException();
