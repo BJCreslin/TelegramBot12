@@ -2,6 +2,7 @@ package TB;
 
 import TB.config.ConfigCommand;
 import TB.objects.MessageBotTextSingltone;
+import TB.reactions.DateCommand;
 import TB.reactions.EchoSwitch;
 import TB.reactions.Hello;
 import TB.reactions.WeatherCommand;
@@ -38,6 +39,11 @@ public class MyBot extends TelegramLongPollingBot {
             }
             if (message_text.toLowerCase().startsWith("погода".toLowerCase())) {
                 String messText = new WeatherCommand().execute();
+                sendMsg(message, messText);
+            }
+
+            if (message_text.toLowerCase().startsWith("дата".toLowerCase())) {
+                String messText = new DateCommand().execute();
                 sendMsg(message, messText);
             }
 
