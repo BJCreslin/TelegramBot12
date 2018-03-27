@@ -14,6 +14,6 @@ public class DateCommand implements Comandable {
         dateText += String.valueOf(timePoint.getDayOfMonth());
         dateText += " " + timePoint.getMonth().name() + " ";
         dateText += timePoint.getYear();
-        return null;
+        return dateText;
     }
 }
