@@ -1,5 +1,6 @@
 package TB.reactions;
 
+import TB.objects.NAMESEASONSOFYEAR;
 import datetime.Dates;
 
 import java.time.LocalDateTime;
@@ -46,32 +47,7 @@ public class DateCommand implements Comandable {
      */
     private String getRusMonthByEngName(String engName) {
         String monthName = mapMonth.get(engName.toLowerCase());
-       // monthName+=" +++";
-        switch (monthName.toLowerCase()) {
-            case "декабря":
-            case "января":
-            case "февраля": {
-                monthName += " \uD83C\uDFBF";
-                break;
-            }
-            case "марта": //monthName += "vfhfhh";
-            case "апреля":
-            case "мая": {
-                monthName += " \uD83C\uDF31";
-                break;
-            }
-            case "июня":
-            case "июля":
-            case "августа": {
-                monthName += " \uD83C\uDFD6";
-                break;
-            }
-            case "сентября":
-            case "октября":
-            case "ноября": {
-                monthName += " \uD83C\uDF41";
-            }
-        }
+        monthName += " " + NAMESEASONSOFYEAR.getSeasonSymbol(NAMESEASONSOFYEAR.getSeasonByMonthName(monthName));
         return monthName;
     }
 
