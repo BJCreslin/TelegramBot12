@@ -28,7 +28,7 @@ public class DateCommand implements Comandable {
 
     @Override
     public String execute() {
-        Dates dates=new Dates();
+        Dates dates = new Dates();
 
         LocalDateTime timePoint = dates.getDate();
         String dateText = "Сегодня: \uD83D\uDCC6 \n";
@@ -38,8 +38,40 @@ public class DateCommand implements Comandable {
         return dateText;
     }
 
+    /**
+     * Меняем английское название месяца на русское
+     *
+     * @param engName
+     * @return
+     */
     private String getRusMonthByEngName(String engName) {
-        return mapMonth.get(engName.toLowerCase());
+        String monthName = mapMonth.get(engName.toLowerCase());
+        switch (monthName) {
+            case "декабря":
+            case "января":
+            case "февраля": {
+                monthName += " \uD83C\uDFBF";
+                break;
+            }
+            case "марта":
+            case "апреля":
+            case "мая": {
+                monthName += " \uD83C\uDF31";
+                break;
+            }
+            case "июня":
+            case "июля":
+            case "августа": {
+                monthName += " \uD83C\uDFD6";
+                break;
+            }
+            case "сентября":
+            case "октября":
+            case "ноября": {
+                monthName += " \uD83C\uDF41";
+            }
+        }
+        return monthName;
     }
 
 
