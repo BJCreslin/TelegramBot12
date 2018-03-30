@@ -54,7 +54,7 @@ public class DateCommand implements Comandable {
                 monthName += " \uD83C\uDFBF";
                 break;
             }
-            case "марта":
+            case "марта": monthName += "vfhfhh";
             case "апреля":
             case "мая": {
                 monthName += " \uD83C\uDF31";
