@@ -46,7 +46,7 @@ public class DateCommand implements Comandable {
      */
     private String getRusMonthByEngName(String engName) {
         String monthName = mapMonth.get(engName.toLowerCase());
-        monthName+=" +++";
+       // monthName+=" +++";
         switch (monthName.toLowerCase()) {
             case "декабря":
             case "января":
@@ -54,7 +54,7 @@ public class DateCommand implements Comandable {
                 monthName += " \uD83C\uDFBF";
                 break;
             }
-            case "марта": monthName += "vfhfhh";
+            case "марта": //monthName += "vfhfhh";
             case "апреля":
             case "мая": {
                 monthName += " \uD83C\uDF31";
